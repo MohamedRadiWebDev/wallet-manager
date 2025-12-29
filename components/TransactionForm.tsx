@@ -95,19 +95,19 @@ export const TransactionForm: React.FC<Props> = ({ onClose, onSuccess, initialDa
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden animate-slideIn">
-        <div className="p-6 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
-          <h3 className="text-xl font-bold text-slate-800">{initialData ? 'تعديل حركة' : 'إضافة حركة جديدة'}</h3>
-          <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-white rounded-full transition-all">
+      <div className="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden animate-slideIn">
+        <div className="p-6 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">{initialData ? 'تعديل حركة' : 'إضافة حركة جديدة'}</h3>
+          <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-white dark:hover:bg-slate-700 rounded-full transition-all">
             <X size={24} />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-8 space-y-6">
           {errors.length > 0 && (
-            <div className="bg-red-50 p-4 rounded-xl border border-red-100 flex flex-col gap-1">
+            <div className="bg-red-50 dark:bg-red-500/10 p-4 rounded-xl border border-red-100 dark:border-red-500/20 flex flex-col gap-1">
               {errors.map((e, i) => (
-                <div key={i} className="text-red-600 text-sm font-bold flex items-center gap-2">
+                <div key={i} className="text-red-600 dark:text-red-200 text-sm font-bold flex items-center gap-2">
                   <AlertCircle size={14} /> {e}
                 </div>
               ))}
@@ -116,19 +116,19 @@ export const TransactionForm: React.FC<Props> = ({ onClose, onSuccess, initialDa
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">التاريخ</label>
+              <label className="text-sm font-bold text-slate-700 dark:text-slate-200">التاريخ</label>
               <input 
                 type="date" 
                 required
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-slate-700 dark:text-slate-200"
                 value={formData.date}
                 onChange={(e) => setFormData({ ...formData, date: e.target.value })}
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">المحفظة (المصدر)</label>
+              <label className="text-sm font-bold text-slate-700 dark:text-slate-200">المحفظة (المصدر)</label>
               <select 
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-slate-700 dark:text-slate-200"
                 value={formData.wallet}
                 onChange={(e) => setFormData({ ...formData, wallet: e.target.value as Wallet })}
               >
@@ -137,19 +137,19 @@ export const TransactionForm: React.FC<Props> = ({ onClose, onSuccess, initialDa
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">نوع العملية</label>
-              <div className="flex bg-slate-100 p-1 rounded-xl">
+              <label className="text-sm font-bold text-slate-700 dark:text-slate-200">نوع العملية</label>
+              <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
                 <button 
                   type="button"
                   onClick={() => setFormData({ ...formData, type: TransactionType.DEPOSIT, transferTo: null })}
-                  className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${formData.type === TransactionType.DEPOSIT ? 'bg-white shadow-sm text-green-600' : 'text-slate-500'}`}
+                  className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${formData.type === TransactionType.DEPOSIT ? 'bg-white dark:bg-slate-900 shadow-sm text-green-600' : 'text-slate-500 dark:text-slate-400'}`}
                 >
                   إيداع
                 </button>
                 <button 
                   type="button"
                   onClick={() => setFormData({ ...formData, type: TransactionType.WITHDRAW })}
-                  className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${formData.type === TransactionType.WITHDRAW ? 'bg-white shadow-sm text-red-500' : 'text-slate-500'}`}
+                  className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${formData.type === TransactionType.WITHDRAW ? 'bg-white dark:bg-slate-900 shadow-sm text-red-500' : 'text-slate-500 dark:text-slate-400'}`}
                 >
                   سحب
                 </button>
@@ -157,14 +157,14 @@ export const TransactionForm: React.FC<Props> = ({ onClose, onSuccess, initialDa
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">المبلغ</label>
+              <label className="text-sm font-bold text-slate-700 dark:text-slate-200">المبلغ</label>
               <div className="relative">
                 <input 
                   type="number" 
                   step="0.01"
                   required
                   placeholder="0.00"
-                  className="w-full pr-4 pl-12 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all font-bold text-lg"
+                  className="w-full pr-4 pl-12 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all font-bold text-lg text-slate-700 dark:text-slate-200"
                   value={formData.amount || ''}
                   onChange={(e) => setFormData({ ...formData, amount: parseFloat(e.target.value) })}
                 />
@@ -174,9 +174,9 @@ export const TransactionForm: React.FC<Props> = ({ onClose, onSuccess, initialDa
 
             {formData.type === TransactionType.WITHDRAW && (
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700">تحويل إلى (اختياري)</label>
+                <label className="text-sm font-bold text-slate-700 dark:text-slate-200">تحويل إلى (اختياري)</label>
                 <select 
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-slate-700 dark:text-slate-200"
                   value={formData.transferTo || ''}
                   onChange={(e) => setFormData({ ...formData, transferTo: (e.target.value as Wallet) || null })}
                 >
@@ -188,21 +188,21 @@ export const TransactionForm: React.FC<Props> = ({ onClose, onSuccess, initialDa
             )}
           </div>
 
-          <div className="border-t border-slate-50 pt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="border-t border-slate-50 dark:border-slate-800 pt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
              <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">اسم العميل / الموظف</label>
+              <label className="text-sm font-bold text-slate-700 dark:text-slate-200">اسم العميل / الموظف</label>
               <input 
                 type="text" 
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-slate-700 dark:text-slate-200"
                 value={formData.customerName || ''}
                 onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">رقم الحساب</label>
+              <label className="text-sm font-bold text-slate-700 dark:text-slate-200">رقم الحساب</label>
               <input 
                 type="text" 
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-slate-700 dark:text-slate-200"
                 value={formData.accountNumber || ''}
                 onChange={(e) => setFormData({ ...formData, accountNumber: e.target.value })}
               />
@@ -210,9 +210,9 @@ export const TransactionForm: React.FC<Props> = ({ onClose, onSuccess, initialDa
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700">ملاحظات إضافية</label>
+            <label className="text-sm font-bold text-slate-700 dark:text-slate-200">ملاحظات إضافية</label>
             <textarea 
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all resize-none"
+              className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all resize-none text-slate-700 dark:text-slate-200"
               rows={2}
               value={formData.note || ''}
               onChange={(e) => setFormData({ ...formData, note: e.target.value })}
@@ -229,7 +229,7 @@ export const TransactionForm: React.FC<Props> = ({ onClose, onSuccess, initialDa
             <button 
               type="button"
               onClick={onClose}
-              className="flex-1 bg-slate-100 text-slate-600 py-3 rounded-2xl font-bold hover:bg-slate-200 transition-all"
+              className="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-200 py-3 rounded-2xl font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
             >
               إلغاء
             </button>
