@@ -51,9 +51,26 @@ export const Transactions: React.FC = () => {
       setDeleteDialog({ id, groupId });
     } else {
       if (window.confirm('هل أنت متأكد من حذف هذه الحركة؟')) {
+        setTransactions((prev) => prev.filter((tx) => tx.id !== id));
         db.transactions.delete(id).then(() => fetchTransactions());
       }
     }
+  };
+
+  const applyOptimisticDelete = (id: string, groupId: string | null, mode: 'single' | 'group') => {
+    setTransactions((prev) => {
+      if (mode === 'group' && groupId) {
+        return prev.filter((tx) => tx.transferGroupId !== groupId);
+      }
+
+      return prev
+        .filter((tx) => tx.id !== id)
+        .map((tx) =>
+          groupId && tx.transferGroupId === groupId
+            ? { ...tx, transferGroupId: null }
+            : tx
+        );
+    });
   };
 
   const handleConfirmDelete = async (mode: 'single' | 'group') => {
@@ -63,15 +80,24 @@ export const Transactions: React.FC = () => {
       if (mode === 'group' && deleteDialog.groupId) {
         // تأكيد إضافي لحذف التحويل بالكامل كما طلب المستخدم
         if (window.confirm('تنبيه: سيتم حذف طرفي التحويل (السحب والإيداع) معاً. هل تريد الاستمرار؟')) {
-          const related = await db.transactions.where('transferGroupId').equals(deleteDialog.groupId).toArray();
-          await db.transactions.bulkDelete(related.map(r => r.id));
+          applyOptimisticDelete(deleteDialog.id, deleteDialog.groupId, mode);
+          await db.transaction('rw', db.transactions, async () => {
+            const related = await db.transactions.where('transferGroupId').equals(deleteDialog.groupId).toArray();
+            await db.transactions.bulkDelete(related.map(r => r.id));
+          });
         } else {
           // إذا ألغى التأكيد الثاني، نغلق الدايلوج فقط دون حذف
           setDeleteDialog(null);
           return;
         }
       } else {
-        await db.transactions.delete(deleteDialog.id);
+        applyOptimisticDelete(deleteDialog.id, deleteDialog.groupId, mode);
+        await db.transaction('rw', db.transactions, async () => {
+          await db.transactions.delete(deleteDialog.id);
+          if (deleteDialog.groupId) {
+            await db.transactions.where('transferGroupId').equals(deleteDialog.groupId).modify({ transferGroupId: null });
+          }
+        });
       }
       
       // إغلاق الدايلوج وتحديث البيانات فوراً
