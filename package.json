@@ -13,10 +13,14 @@
     "react-dom": "^19.2.3",
     "recharts": "^3.6.0",
     "lucide-react": "^0.562.0",
-    "dexie": "^4.2.1"
+    "dexie": "^4.2.1",
+    "jszip": "^3.10.1",
+    "papaparse": "^5.5.3",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "@types/papaparse": "^5.3.16",
     "@vitejs/plugin-react": "^5.0.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"

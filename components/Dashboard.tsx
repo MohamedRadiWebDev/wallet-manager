@@ -55,16 +55,16 @@ export const Dashboard: React.FC = () => {
     <div className="space-y-8 animate-fadeIn">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">نظرة عامة</h2>
-          <p className="text-slate-500">مرحباً بك، إليك ملخص أرصدة المحافظ اليوم.</p>
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">نظرة عامة</h2>
+          <p className="text-slate-500 dark:text-slate-400">مرحباً بك، إليك ملخص أرصدة المحافظ اليوم.</p>
         </div>
-        <div className="bg-white px-6 py-4 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
+        <div className="bg-white dark:bg-slate-900 px-6 py-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 flex items-center gap-4">
           <div className="bg-blue-600 p-3 rounded-full text-white shadow-lg shadow-blue-200">
             <Activity size={24} />
           </div>
           <div>
-            <p className="text-sm text-slate-500 font-medium">إجمالي الرصيد المجمع</p>
-            <p className="text-2xl font-black text-blue-700">{totalBalance.toLocaleString()} <span className="text-sm">ج.م</span></p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">إجمالي الرصيد المجمع</p>
+            <p className="text-2xl font-black text-blue-700 dark:text-blue-200">{totalBalance.toLocaleString()} <span className="text-sm">ج.م</span></p>
           </div>
         </div>
       </header>
@@ -72,18 +72,18 @@ export const Dashboard: React.FC = () => {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((s) => (
-          <div key={s.wallet} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative overflow-hidden">
+          <div key={s.wallet} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-md transition-shadow relative overflow-hidden">
             <div className={`absolute top-0 right-0 w-1.5 h-full`} style={{ backgroundColor: WALLET_CONFIG[s.wallet].color }}></div>
             <div className="flex justify-between items-start mb-4">
               <div className={`p-2 rounded-xl ${WALLET_CONFIG[s.wallet].bg}`} style={{ color: WALLET_CONFIG[s.wallet].color }}>
                 <WalletIcon size={24} />
               </div>
-              <span className="text-xs font-bold px-2 py-1 rounded bg-slate-100 text-slate-500 uppercase tracking-wider">{s.transactionCount} عملية</span>
+              <span className="text-xs font-bold px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-300 uppercase tracking-wider">{s.transactionCount} عملية</span>
             </div>
-            <h3 className="text-slate-500 text-sm font-medium mb-1">{WALLET_CONFIG[s.wallet].name}</h3>
-            <p className="text-2xl font-bold text-slate-800 mb-4">{s.balance.toLocaleString()} <span className="text-sm">ج.م</span></p>
+            <h3 className="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">{WALLET_CONFIG[s.wallet].name}</h3>
+            <p className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">{s.balance.toLocaleString()} <span className="text-sm">ج.م</span></p>
             
-            <div className="grid grid-cols-2 gap-2 pt-4 border-t border-slate-50">
+            <div className="grid grid-cols-2 gap-2 pt-4 border-t border-slate-50 dark:border-slate-800">
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">إيداع</span>
                 <span className="text-xs font-bold text-green-600 flex items-center gap-1">
@@ -102,8 +102,8 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* Chart Section */}
-      <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-        <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+      <div className="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6 flex items-center gap-2">
           <Activity className="text-blue-600" size={20} />
           توزيع الأرصدة الحالية
         </h3>
