@@ -59,8 +59,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigat
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 md:p-8 overflow-x-hidden bg-slate-50 dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto">
+      <main className="flex-1 p-4 md:p-8 overflow-x-hidden bg-slate-50 dark:bg-slate-900 min-w-0">
+        <div className="max-w-7xl mx-auto min-w-0">
           {children}
         </div>
       </main>
