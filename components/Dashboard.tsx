@@ -107,7 +107,7 @@ export const Dashboard: React.FC = () => {
           <Activity className="text-blue-600" size={20} />
           توزيع الأرصدة الحالية
         </h3>
-        <div className="h-[300px] w-full">
+        <div className="h-[300px] min-h-[300px] w-full min-w-0">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
