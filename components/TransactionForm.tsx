@@ -95,7 +95,7 @@ export const TransactionForm: React.FC<Props> = ({ onClose, onSuccess, initialDa
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden animate-slideIn">
+      <div className="bg-white dark:bg-slate-900 w-full max-w-2xl max-h-[90vh] rounded-3xl shadow-2xl overflow-hidden animate-slideIn flex flex-col">
         <div className="p-6 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
           <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">{initialData ? 'تعديل حركة' : 'إضافة حركة جديدة'}</h3>
           <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-white dark:hover:bg-slate-700 rounded-full transition-all">
@@ -103,7 +103,7 @@ export const TransactionForm: React.FC<Props> = ({ onClose, onSuccess, initialDa
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-8 space-y-6">
+        <form onSubmit={handleSubmit} className="p-4 md:p-8 space-y-6 overflow-y-auto">
           {errors.length > 0 && (
             <div className="bg-red-50 dark:bg-red-500/10 p-4 rounded-xl border border-red-100 dark:border-red-500/20 flex flex-col gap-1">
               {errors.map((e, i) => (
