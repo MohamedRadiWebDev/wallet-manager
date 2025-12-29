@@ -48,21 +48,21 @@ export const SettingsPage: React.FC = () => {
   return (
     <div className="space-y-8 animate-fadeIn max-w-2xl">
       <header>
-        <h2 className="text-2xl font-bold text-slate-800">إعدادات النظام</h2>
-        <p className="text-slate-500">تخصيص الأرصدة الافتتاحية وإدارة قاعدة البيانات.</p>
+        <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">إعدادات النظام</h2>
+        <p className="text-slate-500 dark:text-slate-400">تخصيص الأرصدة الافتتاحية وإدارة قاعدة البيانات.</p>
       </header>
 
-      <section className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-        <h3 className="text-lg font-bold text-slate-800 border-b border-slate-50 pb-4">الأرصدة الافتتاحية</h3>
+      <section className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm space-y-6">
+        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 border-b border-slate-50 dark:border-slate-800 pb-4">الأرصدة الافتتاحية</h3>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {Object.values(Wallet).map((w) => (
             <div key={w} className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">{w}</label>
+              <label className="text-sm font-bold text-slate-700 dark:text-slate-200">{w}</label>
               <div className="relative">
                 <input 
                   type="number" 
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all font-bold"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all font-bold text-slate-700 dark:text-slate-200"
                   value={openingBalances[w]}
                   onChange={(e) => setOpeningBalances({ ...openingBalances, [w]: parseFloat(e.target.value) || 0 })}
                 />
@@ -72,7 +72,7 @@ export const SettingsPage: React.FC = () => {
           ))}
         </div>
 
-        {msg && <p className="text-green-600 font-bold text-sm bg-green-50 p-3 rounded-lg border border-green-100">{msg}</p>}
+        {msg && <p className="text-green-600 dark:text-green-200 font-bold text-sm bg-green-50 dark:bg-green-500/10 p-3 rounded-lg border border-green-100 dark:border-green-500/20">{msg}</p>}
 
         <button 
           onClick={handleSave}
@@ -84,20 +84,20 @@ export const SettingsPage: React.FC = () => {
         </button>
       </section>
 
-      <section className="bg-red-50 p-8 rounded-2xl border border-red-100 space-y-4">
+      <section className="bg-red-50 dark:bg-red-500/10 p-8 rounded-2xl border border-red-100 dark:border-red-500/20 space-y-4">
         <div className="flex items-start gap-4">
-          <div className="bg-red-100 p-2 rounded-lg text-red-600">
+          <div className="bg-red-100 dark:bg-red-500/20 p-2 rounded-lg text-red-600 dark:text-red-200">
             <AlertTriangle size={24} />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-red-700">منطقة الخطر</h3>
-            <p className="text-red-600/70 text-sm">إعادة ضبط المصنع ستمسح جميع البيانات المسجلة محلياً في هذا المتصفح.</p>
+            <h3 className="text-lg font-bold text-red-700 dark:text-red-200">منطقة الخطر</h3>
+            <p className="text-red-600/70 dark:text-red-200/70 text-sm">إعادة ضبط المصنع ستمسح جميع البيانات المسجلة محلياً في هذا المتصفح.</p>
           </div>
         </div>
         
         <button 
           onClick={handleReset}
-          className="bg-white text-red-600 border border-red-200 py-3 px-6 rounded-2xl font-bold hover:bg-red-600 hover:text-white transition-all flex items-center gap-2"
+          className="bg-white dark:bg-slate-900 text-red-600 dark:text-red-200 border border-red-200 dark:border-red-500/30 py-3 px-6 rounded-2xl font-bold hover:bg-red-600 hover:text-white transition-all flex items-center gap-2"
         >
           <Trash2 size={20} /> مسح كافة البيانات
         </button>
